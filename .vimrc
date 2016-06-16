@@ -30,6 +30,7 @@ set mouse=a
 set t_Co=256
 set timeoutlen=1000
 set ttimeoutlen=0
+set splitright
 
 set laststatus=2
 set expandtab
