@@ -31,6 +31,7 @@ set t_Co=256
 set timeoutlen=1000
 set ttimeoutlen=0
 set splitright
+set colorcolumn=80
 
 set laststatus=2
 set expandtab
@@ -39,5 +40,9 @@ let g:lightline = {
       \ }
 
 filetype indent on
+autocmd FileType js set shiftwidth=2
+autocmd FileType html set shiftwidth=2
+
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 colorscheme molokai
