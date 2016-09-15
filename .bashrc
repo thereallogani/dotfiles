@@ -102,6 +102,8 @@ alias ll='ls -alF'
 alias lsa='ls -A'
 alias l='ls -CF'
 alias tmux='tmux -2'
+alias sl='ls'
+alias cdgo="cd ~/code/go/src/"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -131,7 +133,7 @@ source ~/.git-prompt.sh
    
   RED="\[\033[0;31m\]"
   YELLOW="\[\033[0;33m\]"
-  GREEN="\[\033[01;32m\]"
+  GREEN="\[\033[0;32m\]"
   NO_COLOR="\[\033[0m\]"
    
   PS1="$GREEN\W $YELLOW\$(__git_ps1)$NO_COLOR\$ "

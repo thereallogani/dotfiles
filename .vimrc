@@ -1,8 +1,23 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundles')
+Plug 'tpope/vim-sensible'
+Plug 'itchyny/lightline.vim'
+Plug 'neomake/neomake'
+Plug 'scrooloose/nerdtree'
+Plug 'fatih/vim-go'
+Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-rooter'
+call plug#end()
+
+
 set nocompatible
 
 filetype off
-
-execute pathogen#infect()
 
 map <C-n> :NERDTreeToggle<CR>
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -35,6 +50,7 @@ set colorcolumn=80
 
 set laststatus=2
 set expandtab
+set scrolloff=5
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
