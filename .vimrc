@@ -1,8 +1,24 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundles')
+Plug 'tpope/vim-sensible'
+Plug 'itchyny/lightline.vim'
+Plug 'neomake/neomake'
+Plug 'scrooloose/nerdtree'
+Plug 'fatih/vim-go'
+Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-rooter'
+Plug 'scwood/vim-hybrid'
+call plug#end()
+
+
 set nocompatible
 
 filetype off
-
-execute pathogen#infect()
 
 map <C-n> :NERDTreeToggle<CR>
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -31,13 +47,19 @@ set t_Co=256
 set timeoutlen=1000
 set ttimeoutlen=0
 set splitright
+set colorcolumn=80
 
 set laststatus=2
 set expandtab
+set scrolloff=5
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 
 filetype indent on
+autocmd FileType js set shiftwidth=2
+autocmd FileType html set shiftwidth=2
 
-colorscheme molokai
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+set background=dark
+colorscheme hybrid
