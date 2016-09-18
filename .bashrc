@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 set bell-style none
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
