@@ -30,7 +30,6 @@ set backspace=indent,eol,start
 set autoindent     " always set autoindenting on
 set copyindent     " copy previous indentation on autoindent
 set number         " always show line numbers
-set shiftwidth=4   " number of spaces to use for autoindenting
 set shiftround     " use multiple of shiftwidth when autoindenting w </>
 set showmatch " set show matching parenthesis
 set ignorecase     " ignore case when searching
@@ -41,7 +40,6 @@ set incsearch      " show search matches as you type
 set visualbell     " don't beep
 set noerrorbells   " don't beep
 set nobackup
-set noswapfile
 set mouse=a
 set t_Co=256
 set timeoutlen=1000
@@ -53,12 +51,14 @@ set laststatus=2
 set expandtab
 set scrolloff=5
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'jellybeans',
       \ }
 
 filetype indent on
-autocmd FileType js set shiftwidth=2
-autocmd FileType html set shiftwidth=2
+autocmd FileType js setlocal sw=2 sts=2 tw=2
+autocmd FileType html setlocal sw=2 sts=2 tw=2
+autocmd FileType python setlocal sw=4 sts=4 tw=4
+autocmd FileType go setlocal sw=4 sts=4 tw=4
 
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 set background=dark
