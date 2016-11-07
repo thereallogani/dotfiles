@@ -17,12 +17,13 @@ Plug 'scwood/vim-hybrid'
 Plug 'chriskempson/tomorrow-theme'
 call plug#end()
 
-
-set nocompatible
+au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
 
 map <C-n> :NERDTreeToggle<CR>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <C-i> :CtrlPBuffer<CR>
+
 set hidden
+set nocompatible
 set nowrap
 set tabstop=4      " a tab is four spaces
 set backspace=indent,eol,start
@@ -49,7 +50,7 @@ set laststatus=2
 set expandtab
 set scrolloff=5
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night',
+      \ 'colorscheme': 'seoul256',
       \ }
 
 filetype indent on
