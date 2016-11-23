@@ -14,7 +14,7 @@ Plug 'lepture/vim-jinja'
 Plug 'neomake/neomake'
 Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
-Plug 'scwood/vim-hybrid'
+Plug 'thereallogani/vim-hybrid'
 Plug 'tpope/vim-sensible'
 call plug#end()
 
