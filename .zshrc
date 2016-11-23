@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/logan/.oh-my-zsh
+export ZSH=/users/pohara3-gtri/.oh-my-zsh
 
 ZSH_THEME="clean"
-
+DISABLE_AUTO_UPDATE="true"
 CASE_SENSITIVE="true"
 
 plugins=(git)
@@ -22,11 +22,14 @@ else
   export EDITOR='vim'
 fi
 
+setopt APPEND_HISTORY
 # Aliases
 alias ll='ls -alF'
 alias lsa='ls -A'
 alias l='ls -CF'
 alias tmux='tmux -2'
-alias cdgo='cd /home/logan/code/go/src'
+alias cdgo='cd /users/pohara3-gtri/code/go/src'
 alias anyconnect='/opt/cisco/anyconnect/bin/vpnui'
 alias sl='ls'
+
+bindkey -M menuselect '^M' .accept-line

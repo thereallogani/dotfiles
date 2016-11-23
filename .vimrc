@@ -5,50 +5,53 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundles')
-Plug 'tpope/vim-sensible'
-Plug 'itchyny/lightline.vim'
-Plug 'neomake/neomake'
-Plug 'scrooloose/nerdtree'
-Plug 'fatih/vim-go'
-Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-rooter'
-Plug 'nvie/vim-flake8'
-Plug 'scwood/vim-hybrid'
 Plug 'chriskempson/tomorrow-theme'
+Plug 'fatih/vim-go'
+Plug 'itchyny/lightline.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'lepture/vim-jinja'
+Plug 'neomake/neomake'
+Plug 'nvie/vim-flake8'
+Plug 'scrooloose/nerdtree'
+Plug 'scwood/vim-hybrid'
+Plug 'tpope/vim-sensible'
 call plug#end()
 
 au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-i> :CtrlPBuffer<CR>
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
+set autoindent                  " always set autoindenting on
+set background=dark
+set backspace=indent,eol,start	" allow backspace over everything in insert
+set colorcolumn=80
+set copyindent                  " copy previous indentation on autoindent
+set expandtab
 set hidden
+set hlsearch                    " highlight search terms
+set ignorecase                  " ignore case when searching
+set incsearch                   " show search matches as you type
+set laststatus=2
+set mouse=a
+set nobackup
 set nocompatible
 set nowrap
-set tabstop=4      " a tab is four spaces
-set backspace=indent,eol,start
-			" allow backspace over everything in insert
-set autoindent     " always set autoindenting on
-set copyindent     " copy previous indentation on autoindent
-set number         " always show line numbers
-set shiftround     " use multiple of shiftwidth when autoindenting w </>
-set showmatch " set show matching parenthesis
-set ignorecase     " ignore case when searching
-set smartcase      " ignore case if search pattern is all lowercase
-set smarttab       " insert tabs by shiftwidth
-set hlsearch       " highlight search terms
-set incsearch      " show search matches as you type
-set nobackup
-set visualbell
-set mouse=a
-set t_Co=256
+set number
+set scrolloff=5
+set shiftround                  " use multiple of shiftwidth when autoindenting w </>
+set showmatch                   " set show matching parenthesis
+set smartcase                   " ignore case if search pattern is all lowercase
+set smarttab                    " insert tabs by shiftwidth
+set splitright
+set tabstop=4                   " a tab is four spaces
 set timeoutlen=1000
 set ttimeoutlen=0
-set splitright
-set colorcolumn=80
-set laststatus=2
-set expandtab
-set scrolloff=5
+set t_Co=256
+set visualbell
+
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ }
@@ -64,8 +67,7 @@ autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_quickfix=1
 let g:flake8_show_in_gutter=1
 
-nnoremap <silent> <C-l> :nohl<CR><C-l>
-
-set background=dark
 colorscheme hybrid
 hi LineNr ctermfg=grey
+
+autocmd BufWritePre * %s/\s\+$//e
