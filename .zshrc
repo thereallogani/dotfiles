@@ -30,6 +30,5 @@ alias l='ls -CF'
 alias tmux='tmux -2'
 alias cdgo='cd /users/pohara3-gtri/code/go/src'
 alias anyconnect='/opt/cisco/anyconnect/bin/vpnui'
-alias sl='ls'
 
 bindkey -M menuselect '^M' .accept-line

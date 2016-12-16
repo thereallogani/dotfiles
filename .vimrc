@@ -16,6 +16,7 @@ Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
 Plug 'thereallogani/vim-hybrid'
 Plug 'tpope/vim-sensible'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
@@ -52,6 +53,7 @@ set ttimeoutlen=0
 set t_Co=256
 set visualbell
 
+let g:syntastic_python_checkers = ['flake8']
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ }
@@ -61,6 +63,8 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType html setlocal shiftwidth=2
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType go setlocal shiftwidth=4
+autocmd FileType cpp setlocal shiftwidth=4
+autocmd FileType c setlocal shiftwidth=4
 autocmd BufWritePost *.py call Flake8()
 
 " flake8
