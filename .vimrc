@@ -17,6 +17,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'thereallogani/vim-hybrid'
 Plug 'tpope/vim-sensible'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
@@ -53,6 +54,7 @@ set ttimeoutlen=0
 set t_Co=256
 set visualbell
 
+let g:syntastic_python_checkers = ['flake8']
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ }
