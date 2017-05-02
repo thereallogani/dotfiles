@@ -16,6 +16,7 @@ Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
 Plug 'thereallogani/vim-hybrid'
 Plug 'tpope/vim-sensible'
+Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
 au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\"" | endif
@@ -53,7 +54,7 @@ set t_Co=256
 set visualbell
 
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'jellybeans',
       \ }
 
 filetype indent on
@@ -61,6 +62,8 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType html setlocal shiftwidth=2
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType go setlocal shiftwidth=4
+autocmd FileType cpp setlocal shiftwidth=4
+autocmd FileType c setlocal shiftwidth=4
 autocmd BufWritePost *.py call Flake8()
 
 " flake8

@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/users/pohara3-gtri/.oh-my-zsh
+export ZSH=/home/logan/.oh-my-zsh
 
 ZSH_THEME="clean"
 DISABLE_AUTO_UPDATE="true"
@@ -28,8 +28,8 @@ alias ll='ls -alF'
 alias lsa='ls -A'
 alias l='ls -CF'
 alias tmux='tmux -2'
-alias cdgo='cd /users/pohara3-gtri/code/go/src'
-alias anyconnect='/opt/cisco/anyconnect/bin/vpnui'
+alias cdgo='cd $HOME/code/go/src'
 alias sl='ls'
 
 bindkey -M menuselect '^M' .accept-line
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
