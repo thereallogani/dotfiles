@@ -1,0 +1,1 @@
+("~/code/ap/scripts/" "~/code/ap/mars-base/")
