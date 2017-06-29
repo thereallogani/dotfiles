@@ -12,21 +12,16 @@
 (eval-when-compile
   (require 'use-package)
   (require 'diminish)
+  (require 'helm-config)
 )
 
+(use-package go-mode)
 (use-package evil
   ;; We're first so we define the maps we override later
   :config
   (evil-mode 1)
 )
 (use-package all-the-icons)
-;; (use-package spaceline-all-the-icons
-;;   :after spaceline-config
-;;   :config
-;;     (setq spaceline-all-the-icons-separator-type 'cup)
-;;     (spaceline-all-the-icons--setup-neotree)
-;;     (spaceline-all-the-icons-theme)
-;; )
 (use-package ample-theme)
 (use-package anaconda-mode
   :commands anaconda-mode
@@ -48,7 +43,7 @@
         (define-key evil-normal-state-map (kbd "C-c ?") 'anaconda-mode-show-doc)
         (define-key evil-normal-state-map (kbd "C-c t") 'python-insert-trace)
         'anaconda-mode)))
-    )
+)
 (use-package base16-theme
   :config
   (load-theme 'ample-flat)
@@ -75,7 +70,6 @@
     (define-key evil-normal-state-map (kbd "<SPC>f") 'counsel-ag-project-at-point)
     (define-key evil-normal-state-map (kbd "<SPC>B") 'ivy-switch-buffer)
     (define-key evil-normal-state-map (kbd "C-I") 'ivy-switch-buffer)
-    (define-key evil-normal-state-map (kbd "<SPC>p") 'counsel-find-file)
 )
 (use-package counsel-dash
   :init
@@ -174,11 +168,27 @@
 (use-package counsel-projectile
   :config
     ;; (counsel-projectile-on)
-    (define-key evil-normal-state-map (kbd "<SPC>b") 'counsel-projectile-switch-to-buffer)
     (define-key evil-normal-state-map (kbd "C-i") 'counsel-projectile-switch-to-buffer)
-    (define-key evil-normal-state-map (kbd "<SPC>e") 'counsel-projectile-find-file)
+    (define-key evil-normal-state-map (kbd "<SPC>e") 'counsel-find-file)
+    (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
+    (define-key evil-normal-state-map (kbd "<SPC>b") 'helm-buffers-list)
 )
 (use-package puppet-mode)
+(use-package pyenv-mode)
+(use-package pyenv-mode-auto)
+(use-package rainbow-delimiters
+  :config
+    (add-hook 'c-mode-common-hook (function (lambda () (
+      rainbow-delimiters-mode-enable))))
+)
+(use-package rainbow-mode)
+;; (use-package spaceline-all-the-icons
+;;   :after spaceline-config
+;;   :config
+;;     (setq spaceline-all-the-icons-separator-type 'cup)
+;;     (spaceline-all-the-icons--setup-neotree)
+;;     (spaceline-all-the-icons-theme)
+;; )
 (use-package spaceline-config
   :ensure spaceline
   :config
@@ -192,14 +202,6 @@
   (setq powerline-default-separator 'curve)
   (spaceline-spacemacs-theme)
 )
-(use-package pyenv-mode)
-(use-package pyenv-mode-auto)
-(use-package rainbow-delimiters
-  :config
-    (add-hook 'c-mode-common-hook (function (lambda () (
-      rainbow-delimiters-mode-enable))))
-)
-(use-package rainbow-mode)
 (use-package undo-tree
   :diminish undo-tree-mode)
 (use-package web-mode)
