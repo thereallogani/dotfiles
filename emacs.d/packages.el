@@ -182,13 +182,15 @@
       rainbow-delimiters-mode-enable))))
 )
 (use-package rainbow-mode)
-;; (use-package spaceline-all-the-icons
-;;   :after spaceline-config
-;;   :config
-;;     (setq spaceline-all-the-icons-separator-type 'cup)
-;;     (spaceline-all-the-icons--setup-neotree)
-;;     (spaceline-all-the-icons-theme)
-;; )
+(use-package spaceline-all-the-icons
+  :after spaceline-config
+  :config
+    (setq spaceline-all-the-icons-separator-type 'cup)
+    (setq spaceline-all-the-icons-flycheck-alternate t)
+    (setq spaceline-all-the-icons-icon-set-flycheck-slim 'outline)
+    (spaceline-all-the-icons--setup-neotree)
+    (spaceline-all-the-icons-theme)
+)
 (use-package spaceline-config
   :ensure spaceline
   :config
@@ -199,8 +201,8 @@
         evil-normal-state-tag "N"
   )
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  (setq powerline-default-separator 'curve)
-  (spaceline-spacemacs-theme)
+;  (setq powerline-default-separator 'curve)
+;  (spaceline-spacemacs-theme)
 )
 (use-package undo-tree
   :diminish undo-tree-mode)
