@@ -20,6 +20,7 @@
   ;; We're first so we define the maps we override later
   :config
   (evil-mode 1)
+  (setq evil-vsplit-window-right 1)
 )
 (use-package all-the-icons)
 (use-package ample-theme)
@@ -94,7 +95,6 @@
     (define-key evil-normal-state-map (kbd "<SPC>D") 'counsel-dash)
 )
 (use-package editorconfig)
-(use-package ensime)
 (use-package evil-matchit
   :config
   (global-evil-matchit-mode 1)
@@ -147,17 +147,6 @@
 (use-package magit
   :diminish magit-auto-revert-mode
 )
-(use-package neotree
-  :init
-    (setq neo-theme 'icons)
-  :commands (neotree-toggle neotree-hide neotree-show)
-  :config
-    (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-    (define-key evil-normal-state-map (kbd "<SPC>t") 'neotree-toggle)
-)
 (use-package projectile
   :diminish projectile-mode
   :init
@@ -172,6 +161,7 @@
     (define-key evil-normal-state-map (kbd "<SPC>e") 'counsel-find-file)
     (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
     (define-key evil-normal-state-map (kbd "<SPC>b") 'helm-buffers-list)
+    (setq ivy-height 20)
 )
 (use-package puppet-mode)
 (use-package pyenv-mode)
@@ -201,8 +191,6 @@
         evil-normal-state-tag "N"
   )
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-;  (setq powerline-default-separator 'curve)
-;  (spaceline-spacemacs-theme)
 )
 (use-package undo-tree
   :diminish undo-tree-mode)
