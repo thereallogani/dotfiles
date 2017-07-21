@@ -197,6 +197,7 @@
     (define-key evil-normal-state-map (kbd "C-i") 'counsel-projectile-switch-to-buffer)
     (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
     (define-key evil-normal-state-map (kbd "<SPC>p") 'counsel-projectile-switch-project)
+    (setq ivy-height 20)
 )
 (use-package puppet-mode)
 (use-package spaceline-config
