@@ -12,10 +12,15 @@
 (eval-when-compile
   (require 'use-package)
   (require 'diminish)
-  (require 'helm-config)
 )
 
-(use-package go-mode)
+(use-package go-mode
+  :config
+  (add-hook 'go-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'gofmt-before-save)
+              (setq tab-width 4)
+              (setq indent-tabs-mode 1))))
 (use-package evil
   ;; We're first so we define the maps we override later
   :config
@@ -23,7 +28,18 @@
   (setq evil-vsplit-window-right 1)
 )
 (use-package all-the-icons)
-(use-package ample-theme)
+(use-package spaceline-all-the-icons
+  :after spaceline-config
+  :config
+    (setq spaceline-all-the-icons-separator-type 'none)
+    (spaceline-all-the-icons--setup-neotree)
+    (spaceline-all-the-icons-theme)
+)
+(use-package ample-theme
+  :init (progn (load-theme 'ample-flat t t)
+               (enable-theme 'ample-flat))
+  :defer t
+  :ensure t)
 (use-package anaconda-mode
   :commands anaconda-mode
   :diminish anaconda-mode
@@ -43,12 +59,8 @@
         (define-key evil-normal-state-map (kbd "C-c r") 'anaconda-mode-find-references)
         (define-key evil-normal-state-map (kbd "C-c ?") 'anaconda-mode-show-doc)
         (define-key evil-normal-state-map (kbd "C-c t") 'python-insert-trace)
-        'anaconda-mode)))
-)
-(use-package base16-theme
-  :config
-  (load-theme 'ample-flat)
-)
+        'anaconda-mode))))
+(use-package base16-theme)
 (use-package company
   :diminish company-mode
   :config
@@ -69,14 +81,14 @@
     (define-key evil-normal-state-map (kbd "/") 'swiper)
     (define-key evil-normal-state-map (kbd "M-x") 'counsel-M-x)
     (define-key evil-normal-state-map (kbd "<SPC>f") 'counsel-ag-project-at-point)
-    (define-key evil-normal-state-map (kbd "<SPC>B") 'ivy-switch-buffer)
-    (define-key evil-normal-state-map (kbd "C-I") 'ivy-switch-buffer)
+    (define-key evil-normal-state-map (kbd "<SPC>b") 'ivy-switch-buffer)
+    (define-key evil-normal-state-map (kbd "<SPC>e") 'counsel-find-file)
 )
 (use-package counsel-dash
   :init
     (setq counsel-dash-docsets-path "~/.emacs/dash-docsets"
           counsel-dash-min-length 3
-          counsel-dash-browser-func 'eww
+          counsel-dash-browser-func 'browse-url
     )
 
     (defun counsel-dash-at-point ()
@@ -91,6 +103,7 @@
     (add-hook 'c++-mode-hook (lambda () (setq-local counsel-dash-docsets '("C++"))))
     (add-hook 'c-mode-hook (lambda () (setq-local counsel-dash-docsets '("C"))))
     (add-hook 'sh-mode-hook (lambda () (setq-local counsel-dash-docsets '("Bash"))))
+    (add-hook 'go-mode-hook (lambda () (setq-local counsel-dash-docsets '("Go"))))
     (define-key evil-normal-state-map (kbd "<SPC>d") 'counsel-dash-at-point)
     (define-key evil-normal-state-map (kbd "<SPC>D") 'counsel-dash)
 )
@@ -147,40 +160,45 @@
 (use-package magit
   :diminish magit-auto-revert-mode
 )
+(use-package neotree
+  :init
+    (setq neo-theme 'icons)
+    (defun neotree-project-dir ()
+      "Open NeoTree using the git root."
+      (interactive)
+      (let ((project-dir (projectile-project-root))
+            (file-name (buffer-file-name)))
+        (neotree-toggle)
+        (if project-dir
+            (if (neo-global--window-exists-p)
+                (progn
+                  (neotree-dir project-dir)
+                  (neotree-find file-name)))
+          (message "Could not find git project root."))))
+    (define-key evil-normal-state-map (kbd "<SPC>T") 'neotree-toggle)
+    (define-key evil-normal-state-map (kbd "<SPC>t") 'neotree-project-dir)
+  :commands (neotree-project-dir neotree-toggle neotree-hide neotree-show)
+  :config
+    (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-quick-look)
+    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+    (evil-define-key 'normal neotree-mode-map (kbd "<SPC>t") 'neotree-hide)
+    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+)
 (use-package projectile
   :diminish projectile-mode
   :init
     (setq projectile-completion-system 'ivy)
     (setq projectile-enable-caching t)
+  :config
     (projectile-global-mode)
 )
 (use-package counsel-projectile
   :config
-    ;; (counsel-projectile-on)
     (define-key evil-normal-state-map (kbd "C-i") 'counsel-projectile-switch-to-buffer)
-    (define-key evil-normal-state-map (kbd "<SPC>e") 'counsel-find-file)
     (define-key evil-normal-state-map (kbd "C-p") 'counsel-projectile-find-file)
-    (define-key evil-normal-state-map (kbd "<SPC>b") 'helm-buffers-list)
-    (setq ivy-height 20)
+    (define-key evil-normal-state-map (kbd "<SPC>p") 'counsel-projectile-switch-project)
 )
 (use-package puppet-mode)
-(use-package pyenv-mode)
-(use-package pyenv-mode-auto)
-(use-package rainbow-delimiters
-  :config
-    (add-hook 'c-mode-common-hook (function (lambda () (
-      rainbow-delimiters-mode-enable))))
-)
-(use-package rainbow-mode)
-(use-package spaceline-all-the-icons
-  :after spaceline-config
-  :config
-    (setq spaceline-all-the-icons-separator-type 'cup)
-    (setq spaceline-all-the-icons-flycheck-alternate t)
-    (setq spaceline-all-the-icons-icon-set-flycheck-slim 'outline)
-    (spaceline-all-the-icons--setup-neotree)
-    (spaceline-all-the-icons-theme)
-)
 (use-package spaceline-config
   :ensure spaceline
   :config
@@ -189,9 +207,20 @@
         evil-visual-state-tag "V"
         evil-insert-state-tag "I"
         evil-normal-state-tag "N"
+        spaceline-evil-insert "#89E5A0"
+        spaceline-evil-normal "#447CD6"
+        spaceline-evil-visual "#D66A5C"
   )
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 )
+(use-package pyenv-mode)
+(use-package pyenv-mode-auto)
+(use-package rainbow-delimiters
+  :config
+    (add-hook 'c-mode-common-hook (function (lambda () (
+      rainbow-delimiters-mode-enable))))
+)
+(use-package rainbow-mode)
 (use-package undo-tree
   :diminish undo-tree-mode)
 (use-package web-mode)
