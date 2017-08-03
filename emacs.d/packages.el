@@ -141,7 +141,7 @@
                  (window-height . 0.2)))
   (defun delete-flycheck-errors-list ()
     (interactive)
-    (if (get-buffer-window "*Flycheck errors*" "visible") (delete-window "*Flycheck errors*" "visible"))))
+    (if (get-buffer-window "*Flycheck errors*" "visible") (delete-window "*Flycheck errors*" "visible")))
   :config
     (define-key evil-normal-state-map (kbd "<SPC>lo") 'flycheck-list-errors)
     (define-key evil-normal-state-map (kbd "<SPC>lc") 'delete-flycheck-errors-list)
@@ -162,6 +162,9 @@
 )
 (use-package magit
   :diminish magit-auto-revert-mode
+  :config
+    (define-key evil-normal-state-map (kbd "<SPC>gs") 'magit-status)
+
 )
 (use-package neotree
   :init
